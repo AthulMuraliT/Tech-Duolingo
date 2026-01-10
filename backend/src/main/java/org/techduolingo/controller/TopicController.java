@@ -23,7 +23,7 @@ public class TopicController {
     }
 
     // 2️⃣ Get topic details
-    @GetMapping("/{id}")
+    @GetMapping("/api/topics/{id}")
     public Topic getTopicById(@PathVariable Long id) {
         return topicService.getTopicById(id);
     }

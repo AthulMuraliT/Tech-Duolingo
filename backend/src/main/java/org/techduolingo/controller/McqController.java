@@ -10,21 +10,21 @@ import org.techduolingo.service.McqService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/mcqs")
 @CrossOrigin
 public class McqController {
 
     @Autowired
     private McqService mcqService;
 
-    // 3️⃣ Get MCQs for topic
-    @GetMapping("/topics/{id}/mcqs")
+    // Get MCQs for topic
+    @GetMapping("/api/topics/{topicId}/mcqs")
     public List<McqResponseDTO> getMcqs(@PathVariable Long id) {
         return mcqService.getMcqsByTopic(id);
     }
 
-    // 4️⃣ Validate answer
-    @PostMapping("/mcqs/validate")
+    // Validate answer
+    @PostMapping("/api/mcqs/validate")
     public McqValidateResponse validate(@RequestBody McqValidateRequest request) {
 
         if (request.getSelectedOption() < 1 || request.getSelectedOption() > 4) {
