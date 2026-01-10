@@ -1,10 +1,14 @@
 package org.techduolingo.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 import org.techduolingo.dto.McqResponseDTO;
+import org.techduolingo.dto.McqValidateRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.techduolingo.model.Mcq;
 import org.techduolingo.repository.McqRepository;
+
+import java.util.List;
 
 import java.util.List;
 

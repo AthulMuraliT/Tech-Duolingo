@@ -1,16 +1,50 @@
-# React + Vite
+# Code Vocabulary Builder (Tech Duolingo)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack learning platform to help freshers learn technical terms like API, JWT, Docker using a Duolingo-style approach.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
+- Learn technical topics with descriptions, code snippets & external links
+- Topic-based MCQ quizzes
+- Instant answer validation
+- Progress bar & score tracking
+- No user login (lightweight MVP)
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🧠 Tech Stack
+### Frontend
+- React (Vite)
+- React Router
+- Axios
 
-## Expanding the ESLint configuration
+### Backend
+- Spring Boot
+- REST APIs
+- MySQL / H2
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 📁 Pages
+- **Learning Page** → View all topics
+- **Topic Detail Page** → Learn in depth
+- **MCQ Page** → Test knowledge with quizzes
+
+---
+
+## 🔌 Backend APIs Used
+- GET `/api/topics`
+- GET `/api/topics/{id}`
+- GET `/api/mcqs`
+- GET `/api/topics/{id}/mcqs`
+- POST `/api/mcqs/validate`
+
+---
+
+## ▶️ How to Run
+
+### Frontend
+```bash
+npm install
+npm run dev
