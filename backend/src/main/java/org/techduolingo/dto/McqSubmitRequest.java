@@ -1,7 +1,9 @@
 package org.techduolingo.dto;
 
-public class McqSubmitRequest {
+import lombok.Data;
 
+@Data
+public class McqSubmitRequest {
     private Long mcqId;
     private int selectedOption;
 }

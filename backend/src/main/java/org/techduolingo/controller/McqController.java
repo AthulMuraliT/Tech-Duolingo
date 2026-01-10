@@ -1,5 +1,13 @@
 package org.techduolingo.controller;
 
+import org.springframework.web.bind.annotation.*;
+import org.techduolingo.dto.McqResponseDto;
+import org.techduolingo.dto.McqSubmitRequest;
+import org.techduolingo.dto.McqSubmitResponse;
+import org.techduolingo.service.McqService;
+
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 @CrossOrigin

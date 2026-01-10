@@ -1,6 +1,10 @@
 package org.techduolingo.model;
 
+import jakarta.persistence.*;
+import lombok.Data;
+
 @Entity
+@Data
 public class Mcq {
 
     @Id
@@ -19,6 +23,6 @@ public class Mcq {
     private String option3;
     private String option4;
 
-    // store 1,2,3,4
-    private int correctOption;
+    // 🔥 THIS WAS MISSING
+    private int correctOption; // values: 1,2,3,4
 }
