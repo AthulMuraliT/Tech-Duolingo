@@ -11,6 +11,13 @@ import org.techduolingo.repository.McqRepository;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+import org.techduolingo.dto.McqResponseDto;
+import org.techduolingo.model.Mcq;
+import org.techduolingo.repository.McqRepository;
+
+import java.util.List;
+
 @Service
 public class McqService {
 
