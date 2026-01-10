@@ -1,9 +1,14 @@
 package org.techduolingo.dto;
 
-import lombok.Data;
-
-@Data
 public class McqValidateRequest {
+
     private Long mcqId;
-    private int selectedOption;
+    private Integer selectedOption;
+
+    public Long getMcqId() { return mcqId; }
+    public void setMcqId(Long mcqId) { this.mcqId = mcqId; }
+
+    public Integer getSelectedOption() { return selectedOption; }
+    public void setSelectedOption(Integer selectedOption) { this.selectedOption = selectedOption; }
 }
+

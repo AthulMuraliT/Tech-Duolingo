@@ -1,41 +1,34 @@
 package org.techduolingo.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.techduolingo.dto.McqResponseDTO;
 import org.techduolingo.dto.McqValidateRequest;
-import org.techduolingo.dto.McqValidateResponse;
+import org.techduolingo.dto.McqSubmitResponse;
 import org.techduolingo.service.McqService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/mcqs")
+@RequestMapping("/api")
 @CrossOrigin
 public class McqController {
 
-    @Autowired
-    private McqService mcqService;
+    private final McqService mcqService;
 
-    // Get MCQs for topic
-    @GetMapping("/api/topics/{topicId}/mcqs")
-    public List<McqResponseDTO> getMcqs(@PathVariable Long id) {
-        return mcqService.getMcqsByTopic(id);
+    public McqController(McqService mcqService) {
+        this.mcqService = mcqService;
     }
 
-    // Validate answer
-    @PostMapping("/api/mcqs/validate")
-    public McqValidateResponse validate(@RequestBody McqValidateRequest request) {
+    // GET MCQs for game
+    @GetMapping("/topics/{topicId}/mcqs")
+    public List<McqResponseDTO> getMcqs(@PathVariable Long topicId) {
+        return mcqService.getMcqsByTopic(topicId);
+    }
 
-        if (request.getSelectedOption() < 1 || request.getSelectedOption() > 4) {
-            throw new RuntimeException("Invalid option");
-        }
-
-        boolean correct = mcqService.validateAnswer(
-                request.getMcqId(),
-                request.getSelectedOption()
-        );
-
-        return new McqValidateResponse(correct);
+    // POST validate answer
+    @PostMapping("/mcqs/validate")
+    public McqSubmitResponse validate(@RequestBody McqValidateRequest request) {
+        return mcqService.validateAnswer(request);
     }
 }
+
