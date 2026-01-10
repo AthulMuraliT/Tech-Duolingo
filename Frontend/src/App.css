@@ -1,42 +1,451 @@
-#root {
-  max-width: 1280px;
+
+
+/* ===============================
+   RESET & BASE
+================================ */
+* {
+  box-sizing: border-box;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-main);
+  color: var(--text-main);
+  overflow-x: hidden;
+}
+
+/* ===============================
+   NAVBAR
+================================ */
+.navbar {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding: 24px 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}
+
+.navbar .logo {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.navbar a {
+  margin-left: 28px;
+  text-decoration: none;
+  color: var(--text-muted);
+}
+
+.navbar a:hover {
+  color: var(--text-main);
+}
+
+/* ===============================
+   HERO SECTION
+================================ */
+.hero {
+  min-height: 100vh;
+  background: var(--bg-main);
+  display: flex;
+  align-items: center;
+}
+
+.hero-content {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 48px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: center;
+  gap: 64px;
+}
+
+.hero h1 {
+  font-size: 3.6rem;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.hero span {
+  color: var(--accent);
+}
+
+.hero p {
+  margin: 22px 0;
+  max-width: 520px;
+  font-size: 1.2rem;
+  color: var(--text-muted);
+}
+
+/* ===============================
+   BUTTONS
+================================ */
+.primary {
+  background: var(--accent);
+  color: #000;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.primary:hover {
+  background: var(--accent-soft);
+}
+
+/* ===============================
+   SPLINE 3D
+================================ */
+.hero-3d {
+  width: 100%;
+  height: 420px;
+  background: radial-gradient(
+    circle at center,
+    rgba(255,255,255,0.06),
+    transparent 70%
+  );
+}
+
+.hero-3d canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ===============================
+   SECTION BASE
+================================ */
+.section {
+  background: var(--bg-main);
+  padding: 100px 0;
+}
+
+.container {
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0 48px;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 42px;
+}
+
+/* ===============================
+   CARD SYSTEM (GLASS + GLOW)
+================================ */
+.pro-card,
+.step-card,
+.term-card {
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.08),
+    rgba(255,255,255,0.02)
+  );
+  border: 1px solid var(--border-soft);
+  border-radius: 18px;
+  padding: 28px;
+  position: relative;
+  backdrop-filter: blur(14px);
+
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.pro-card::before,
+.step-card::before,
+.term-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+}
+
+.pro-card:hover,
+.step-card:hover,
+.term-card:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 25px 60px rgba(0,0,0,0.8),
+    0 0 40px rgba(253,224,71,0.08);
+}
+
+/* ===============================
+   WHY TECH DUOLINGO
+================================ */
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+
+.icon {
+  font-size: 1.8rem;
+  margin-bottom: 14px;
+  color: var(--accent);
+}
+
+.pro-card h4 {
+  margin: 12px 0 6px;
+}
+
+.pro-card p {
+  color: var(--text-muted);
+}
+
+/* ===============================
+   HOW IT WORKS
+================================ */
+.steps-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+.step-card {
+  text-align: center;
+  font-weight: 500;
+}
+
+/* ===============================
+   PREVIEW TERM (HIGHLIGHT CARD)
+================================ */
+.term-card {
+  max-width: 760px;
+  box-shadow:
+    0 30px 70px rgba(0,0,0,0.9),
+    0 0 60px rgba(253,224,71,0.12);
+}
+
+.term-desc {
+  color: var(--text-muted);
+  margin: 12px 0 22px;
+}
+
+.code-block {
+  background: linear-gradient(180deg, #0f172a, #020617);
+  color: #e5e7eb;
+  padding: 18px;
+  border-radius: 10px;
+  overflow-x: auto;
+  margin-bottom: 26px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+}
+
+.primary-btn {
+  background: #635bff;
+  color: #ffffff;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* ===============================
+   LEARN PAGE
+================================ */
+.learn-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 100vh;
+}
+.learn-content {
+  padding: 48px;
+  overflow: visible;
+}
+.learn-content p {
+  max-width: 900px;
+  line-height: 1.7;
+  white-space: normal;
+}
+
+
+.sidebar {
+  background: rgba(255,255,255,0.04);
+  border-right: 1px solid var(--border-soft);
+  padding: 24px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 6px;
+  color: var(--text-muted);
+}
+
+.sidebar li.active,
+.sidebar li:hover {
+  background: var(--accent);
+  color: #000;
+}
+
+.learn-content {
+  padding: 48px;
+  overflow-y: auto;
+}
+
+/* ===============================
+   GAME PAGE
+================================ */
+.game {
+  min-height: 100vh;
+  padding: 120px;
   text-align: center;
 }
+/* ===============================
+   GAME NAVIGATION
+================================ */
+/* ===============================
+   GAME TERM SELECTION CARDS
+================================ */
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 28px;
+  max-width: 900px;
+  width: 100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.game-card {
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.10),
+    rgba(255,255,255,0.04)
+  );
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 20px;
+  padding: 32px;
+  cursor: pointer;
+  text-align: center;
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.card {
-  padding: 2em;
+.game-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  color: #ffffff;
 }
 
-.read-the-docs {
-  color: #888;
+.game-card p {
+  color: #b3b3b3;
+  font-size: 0.95rem;
+}
+
+.game-card:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 30px 60px rgba(0,0,0,0.8),
+    0 0 40px rgba(253,224,71,0.12);
+}
+/* ===============================
+   GAME NAVIGATION
+================================ */
+.game-nav {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.game-nav-btn {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border-soft);
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.game-nav-btn:hover {
+  background: var(--accent);
+  color: #000;
+}
+
+
+/* ===============================
+   FOOTER
+================================ */
+.footer {
+  background: var(--bg-main);
+  border-top: 1px solid var(--border-soft);
+  padding-top: 60px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 40px;
+}
+
+.footer-logo {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.footer-text {
+  color: var(--text-muted);
+  margin-top: 12px;
+  max-width: 300px;
+}
+
+.footer-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer li {
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.footer li:hover {
+  color: var(--text-main);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 20px;
+  font-size: 0.85rem;
+  color: #6b7280;
+  border-top: 1px solid var(--border-soft);
+}
+/* ===============================
+   HOME BUTTON (SIDEBAR)
+================================ */
+.home-btn {
+  width: 100%;
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border-soft);
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.home-btn:hover {
+  background: var(--accent);
+  color: #000;
 }
