@@ -1,46 +1,42 @@
 package org.techduolingo.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.techduolingo.dto.McqResponseDTO;
+import org.techduolingo.model.Mcq;
+import org.techduolingo.repository.McqRepository;
+
+import java.util.List;
+
 @Service
 public class McqService {
 
-    private final McqRepository mcqRepository;
+    @Autowired
+    private McqRepository mcqRepository;
 
-    public McqService(McqRepository mcqRepository) {
-        this.mcqRepository = mcqRepository;
-    }
+    public List<McqResponseDTO> getMcqsByTopic(Long topicId) {
 
-    // Fetch MCQs for game (NO answers leaked)
-    public List<McqResponseDto> getMcqsByTopic(Long topicId) {
-
-        List<Mcq> mcqs = mcqRepository.findByTopicId(topicId);
-
-        return mcqs.stream().map(mcq ->
-                new McqResponseDto(
-                        mcq.getId(),
-                        mcq.getQuestion(),
-                        mcq.getCodeSnippet(),
+        return mcqRepository.findByTopicId(topicId)
+                .stream()
+                .map(m -> new McqResponseDTO(
+                        m.getId(),
+                        m.getQuestion(),
+                        m.getCodeSnippet(),
                         List.of(
-                                mcq.getOption1(),
-                                mcq.getOption2(),
-                                mcq.getOption3(),
-                                mcq.getOption4()
+                                m.getOption1(),
+                                m.getOption2(),
+                                m.getOption3(),
+                                m.getOption4()
                         )
-                )
-        ).toList();
+                ))
+                .toList();
     }
 
-    // Validate answer (core game logic)
-    public McqSubmitResponse validateAnswer(McqSubmitRequest request) {
+    public boolean validateAnswer(Long mcqId, int selectedOption) {
 
-        Mcq mcq = mcqRepository.findById(request.getMcqId())
+        Mcq mcq = mcqRepository.findById(mcqId)
                 .orElseThrow(() -> new RuntimeException("MCQ not found"));
 
-        boolean isCorrect =
-                mcq.getCorrectOption() == request.getSelectedOption();
-
-        return new McqSubmitResponse(
-                isCorrect,
-                mcq.getCorrectOption()
-        );
+        return mcq.getCorrectOption() == selectedOption;
     }
 }
