@@ -9,10 +9,10 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class McqResponseDto {
-
+public class McqResponseDTO {
     private Long id;
     private String question;
     private String codeSnippet;
     private List<String> options;
 }
+
