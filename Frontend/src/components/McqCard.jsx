@@ -1,4 +1,4 @@
-function McqCard({ mcq, onAnswer, selectedOption, result }) {
+function McqCard({ mcq, onSelect, selectedOption, result }) {
   return (
     <div className="mcq-card">
       <h3>{mcq.question}</h3>
@@ -28,7 +28,7 @@ function McqCard({ mcq, onAnswer, selectedOption, result }) {
               key={index}
               className={className}
               disabled={!!selectedOption}
-              onClick={() => onAnswer(optionNumber)}
+              onClick={() => onSelect(optionNumber)}
             >
               {opt}
             </button>

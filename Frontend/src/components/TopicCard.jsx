@@ -9,7 +9,7 @@ function TopicCard({ topic }) {
       onClick={() => navigate(`/topics/${topic.id}`)}
     >
       <h3>{topic.term}</h3>
-      <p>{topic.shortDescription}</p>
+      <p>{topic.description}</p>
     </div>
   );
 }
