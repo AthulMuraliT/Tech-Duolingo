@@ -1,10 +1,9 @@
 package org.techduolingo.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.techduolingo.dto.McqResponseDTO;
 import org.techduolingo.dto.McqValidateRequest;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 import org.techduolingo.dto.McqValidateResponse;
 import org.techduolingo.service.McqService;
 

@@ -22,8 +22,8 @@ public class TopicController {
         return topicService.getAllTopics();
     }
 
-    // 2️⃣ Get topic details
-    @GetMapping("/api/topics/{id}")
+    // 2️⃣ Get topic details by ID
+    @GetMapping("/{id}")   // <-- Fix here
     public Topic getTopicById(@PathVariable Long id) {
         return topicService.getTopicById(id);
     }
