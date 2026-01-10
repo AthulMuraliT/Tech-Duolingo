@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { getTopicById } from "../api/topicApi";
 
 function TopicDetailPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
+
   const [topic, setTopic] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -67,6 +69,22 @@ function TopicDetailPage() {
           </a>
         </div>
       )}
+
+      {/* Quiz Button */}
+      <button
+        onClick={() => navigate(`/mcq?topicId=${topic.id}`)}
+        style={{
+          marginTop: "32px",
+          padding: "10px 16px",
+          borderRadius: "6px",
+          border: "none",
+          backgroundColor: "#4ade80",
+          cursor: "pointer",
+          fontWeight: "600",
+        }}
+      >
+        📝 Take Quiz on {topic.term}
+      </button>
     </div>
   );
 }

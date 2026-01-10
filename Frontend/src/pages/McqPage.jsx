@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { getMcqs, validateMcq } from "../api/mcqApi";
+import { useSearchParams } from "react-router-dom";
+import { getMcqs, getMcqsByTopic, validateMcq } from "../api/mcqApi";
 import McqCard from "../components/McqCard";
 import "../styles/mcq.css";
 
@@ -12,10 +13,16 @@ function McqPage() {
   const [selectedOption, setSelectedOption] = useState(null);
   const [result, setResult] = useState(null);
 
+  const [searchParams] = useSearchParams();
+  const topicId = searchParams.get("topicId");
+
   useEffect(() => {
     async function fetchMcqs() {
       try {
-        const data = await getMcqs(5);
+        const data = topicId
+          ? await getMcqsByTopic(topicId, 5)
+          : await getMcqs(5);
+
         setMcqs(data);
       } catch (error) {
         console.error("Failed to fetch MCQs", error);
@@ -25,7 +32,7 @@ function McqPage() {
     }
 
     fetchMcqs();
-  }, []);
+  }, [topicId]);
 
   async function handleAnswer(option) {
     setSelectedOption(option);
@@ -49,10 +56,21 @@ function McqPage() {
     }
   }
 
+  /* ---------- LOADING STATE ---------- */
   if (loading) {
     return <p style={{ padding: "20px" }}>Loading MCQs...</p>;
   }
 
+  /* ---------- EMPTY MCQ STATE ---------- */
+  if (!loading && mcqs.length === 0) {
+    return (
+      <div className="mcq-container">
+        <p>No MCQs available for this topic.</p>
+      </div>
+    );
+  }
+
+  /* ---------- QUIZ FINISHED ---------- */
   if (currentIndex >= mcqs.length) {
     return (
       <div className="mcq-container">
@@ -60,12 +78,24 @@ function McqPage() {
         <p>
           Score: {score} / {mcqs.length}
         </p>
+
+        <button
+          className="option-btn"
+          style={{ marginTop: "16px" }}
+          onClick={() => {
+            setCurrentIndex(0);
+            setScore(0);
+            setSelectedOption(null);
+            setResult(null);
+          }}
+        >
+          Restart Quiz
+        </button>
       </div>
     );
   }
 
-  const progress =
-    ((currentIndex + 1) / mcqs.length) * 100;
+  const progress = ((currentIndex + 1) / mcqs.length) * 100;
 
   return (
     <div className="mcq-container">
@@ -76,15 +106,11 @@ function McqPage() {
         />
       </div>
 
-      <p>
-        Question {currentIndex + 1} / {mcqs.length}
-      </p>
-
       <McqCard
         mcq={mcqs[currentIndex]}
-        onAnswer={handleAnswer}
         selectedOption={selectedOption}
         result={result}
+        onSelect={handleAnswer}
       />
     </div>
   );
