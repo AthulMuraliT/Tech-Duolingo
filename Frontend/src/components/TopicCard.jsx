@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import "../styles/topicCard.css";
 
 function TopicCard({ topic, progress }) {
   const navigate = useNavigate();
@@ -8,8 +9,12 @@ function TopicCard({ topic, progress }) {
       className="topic-card"
       onClick={() => navigate(`/topics/${topic.id}`)}
     >
-      <h3>{topic.term}</h3>
-      <p>{topic.shortDescription}</p>
+      <div className="card-header">
+        <h3>{topic.term}</h3>
+        {progress >= 100 && <span className="badge">Completed</span>}
+      </div>
+
+      <p className="card-desc">{topic.shortDescription}</p>
 
       {progress !== undefined && (
         <>
@@ -20,9 +25,7 @@ function TopicCard({ topic, progress }) {
             />
           </div>
 
-          <p style={{ fontSize: "14px" }}>
-            {progress}% {progress >= 100 ? "✅ Completed" : ""}
-          </p>
+          <p className="progress-text">{progress}% completed</p>
         </>
       )}
     </div>

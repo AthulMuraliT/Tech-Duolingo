@@ -12,19 +12,27 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <h2>Tech Duolingo</h2>
+      <div className="navbar-left">
+        <h2 className="logo" onClick={() => navigate("/")}>
+          Tech<span>Duolingo</span>
+        </h2>
+      </div>
 
-      <div>
+      <div className="navbar-right">
         {token ? (
           <>
-            <Link to="/">Learn</Link>
-            <Link to="/mcq">MCQ</Link>
-            <button onClick={logout}>Logout</button>
+            <Link to="/" className="nav-link">Learn</Link>
+            <Link to="/mcq" className="nav-link">MCQ</Link>
+            <button className="logout-btn" onClick={logout}>
+              Logout
+            </button>
           </>
         ) : (
           <>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
+            <Link to="/login" className="nav-link">Login</Link>
+            <Link to="/register" className="register-btn">
+              Register
+            </Link>
           </>
         )}
       </div>

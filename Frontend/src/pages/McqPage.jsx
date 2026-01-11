@@ -9,7 +9,6 @@ function McqPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [loading, setLoading] = useState(true);
-
   const [selectedOption, setSelectedOption] = useState(null);
   const [result, setResult] = useState(null);
 
@@ -22,7 +21,6 @@ function McqPage() {
         const data = topicId
           ? await getMcqsByTopic(topicId, 5)
           : await getMcqs(5);
-
         setMcqs(data);
       } catch (error) {
         console.error("Failed to fetch MCQs", error);
@@ -30,67 +28,54 @@ function McqPage() {
         setLoading(false);
       }
     }
-
     fetchMcqs();
   }, [topicId]);
 
   async function handleAnswer(option) {
     setSelectedOption(option);
-
     const currentMcq = mcqs[currentIndex];
+
     try {
       const res = await validateMcq(currentMcq.id, option);
       setResult(res.correct);
 
-      if (res.correct) {
-        setScore((prev) => prev + 1);
-      }
+      if (res.correct) setScore((prev) => prev + 1);
 
       setTimeout(() => {
         setSelectedOption(null);
         setResult(null);
         setCurrentIndex((prev) => prev + 1);
-      }, 800);
+      }, 700);
     } catch (error) {
       console.error("Validation failed", error);
     }
   }
 
-  /* ---------- LOADING STATE ---------- */
   if (loading) {
-    return <p style={{ padding: "20px" }}>Loading MCQs...</p>;
+    return <div className="mcq-state">Loading questions…</div>;
   }
 
-  /* ---------- EMPTY MCQ STATE ---------- */
-  if (!loading && mcqs.length === 0) {
-    return (
-      <div className="mcq-container">
-        <p>No MCQs available for this topic.</p>
-      </div>
-    );
-  }
-
-  /* ---------- QUIZ FINISHED ---------- */
   if (currentIndex >= mcqs.length) {
     return (
       <div className="mcq-container">
-        <h2>🎉 Quiz Finished</h2>
-        <p>
-          Score: {score} / {mcqs.length}
-        </p>
+        <div className="mcq-finish">
+          <h2>Quiz complete</h2>
+          <p>
+            Score: <strong>{score}</strong> / {mcqs.length}
+          </p>
 
-        <button
-          className="option-btn"
-          style={{ marginTop: "16px" }}
-          onClick={() => {
-            setCurrentIndex(0);
-            setScore(0);
-            setSelectedOption(null);
-            setResult(null);
-          }}
-        >
-          Restart Quiz
-        </button>
+          <button
+            className="primary-btn"
+            onClick={() => {
+              setCurrentIndex(0);
+              setScore(0);
+              setSelectedOption(null);
+              setResult(null);
+            }}
+          >
+            Restart quiz
+          </button>
+        </div>
       </div>
     );
   }
@@ -99,11 +84,15 @@ function McqPage() {
 
   return (
     <div className="mcq-container">
+      <div className="mcq-header">
+        <span>
+          Question {currentIndex + 1} of {mcqs.length}
+        </span>
+        <span className="mcq-score">Score: {score}</span>
+      </div>
+
       <div className="progress-bar">
-        <div
-          className="progress-fill"
-          style={{ width: `${progress}%` }}
-        />
+        <div className="progress-fill" style={{ width: `${progress}%` }} />
       </div>
 
       <McqCard

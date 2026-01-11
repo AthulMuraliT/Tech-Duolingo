@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import apiClient from "../api/apiClient";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { isAuthenticated } from "../utils/auth";
+import "../styles/auth.css";
 
 function RegisterPage() {
   const [username, setUsername] = useState("");
@@ -9,7 +10,6 @@ function RegisterPage() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  // 🔐 Redirect if already logged in
   useEffect(() => {
     if (isAuthenticated()) {
       navigate("/");
@@ -29,34 +29,51 @@ function RegisterPage() {
   }
 
   return (
-    <div style={{ padding: "40px", maxWidth: "400px", margin: "auto" }}>
-      <h2>Register</h2>
+    <div className="auth-wrapper">
+      <div className="auth-container">
+        <h1>Create account</h1>
+        <p className="auth-muted">Start learning with Tech Duolingo</p>
 
-      <form onSubmit={handleRegister}>
-        <input
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
+        <form onSubmit={handleRegister}>
+          <div className="field">
+            <label>Username</label>
+            <input
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </div>
 
-        <input
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+          <div className="field">
+            <label>Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+          <div className="field">
+            <label>Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
 
-        <button type="submit">Register</button>
-      </form>
+          <button type="submit" className="primary-btn">
+            Create account
+          </button>
+        </form>
+
+        <div className="auth-footer">
+          <span>Already have an account?</span>
+          <Link to="/login">Sign in</Link>
+        </div>
+      </div>
     </div>
   );
 }

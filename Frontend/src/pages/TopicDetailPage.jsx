@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getTopicById } from "../api/topicApi";
+import "../styles/topicDetail.css";
 
 function TopicDetailPage() {
   const { id } = useParams();
@@ -24,66 +25,40 @@ function TopicDetailPage() {
     fetchTopic();
   }, [id]);
 
-  if (loading) {
-    return <p style={{ padding: "20px" }}>Loading topic...</p>;
-  }
-
-  if (!topic) {
-    return <p style={{ padding: "20px" }}>Topic not found</p>;
-  }
+  if (loading) return <div className="page-state">Loading topic…</div>;
+  if (!topic) return <div className="page-state">Topic not found</div>;
 
   return (
-    <div style={{ padding: "24px", maxWidth: "900px" }}>
-      <h1>{topic.term}</h1>
+    <div className="topic-detail">
+      <h1 className="topic-title">{topic.term}</h1>
 
-      <p style={{ marginTop: "12px", fontSize: "16px" }}>
-        {topic.description}
-      </p>
+      <p className="topic-description">{topic.description}</p>
 
       {topic.codeSnippet && (
-        <>
-          <h3 style={{ marginTop: "24px" }}>Code Example</h3>
-          <pre
-            style={{
-              background: "#1e1e1e",
-              color: "#d4d4d4",
-              padding: "16px",
-              borderRadius: "8px",
-              overflowX: "auto",
-            }}
-          >
+        <div className="code-section">
+          <h3>Code Example</h3>
+          <pre>
             <code>{topic.codeSnippet}</code>
           </pre>
-        </>
-      )}
-
-      {topic.externalLink && (
-        <div style={{ marginTop: "24px" }}>
-          <a
-            href={topic.externalLink}
-            target="_blank"
-            rel="noreferrer"
-            style={{ color: "#2563eb", fontWeight: "500" }}
-          >
-            🔗 Learn more
-          </a>
         </div>
       )}
 
-      {/* Quiz Button */}
+      {topic.externalLink && (
+        <a
+          href={topic.externalLink}
+          target="_blank"
+          rel="noreferrer"
+          className="learn-more"
+        >
+          Learn more
+        </a>
+      )}
+
       <button
+        className="quiz-btn"
         onClick={() => navigate(`/mcq?topicId=${topic.id}`)}
-        style={{
-          marginTop: "32px",
-          padding: "10px 16px",
-          borderRadius: "6px",
-          border: "none",
-          backgroundColor: "#4ade80",
-          cursor: "pointer",
-          fontWeight: "600",
-        }}
       >
-        📝 Take Quiz on {topic.term}
+        Take Quiz on {topic.term}
       </button>
     </div>
   );

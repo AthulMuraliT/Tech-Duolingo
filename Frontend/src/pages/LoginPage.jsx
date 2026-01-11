@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import apiClient from "../api/apiClient";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { isAuthenticated } from "../utils/auth";
+import "../styles/auth.css";
 
 function LoginPage() {
   const [username, setUsername] = useState("");
@@ -9,7 +10,6 @@ function LoginPage() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  // 🔐 Redirect if already logged in
   useEffect(() => {
     if (isAuthenticated()) {
       navigate("/");
@@ -18,6 +18,7 @@ function LoginPage() {
 
   async function handleLogin(e) {
     e.preventDefault();
+    setError("");
 
     try {
       const res = await apiClient.post("/auth/login", {
@@ -27,35 +28,49 @@ function LoginPage() {
 
       localStorage.setItem("token", res.data.token);
       navigate("/");
-    } catch (err) {
+    } catch {
       setError("Invalid username or password");
     }
   }
 
   return (
-    <div style={{ padding: "40px", maxWidth: "400px", margin: "auto" }}>
-      <h2>Login</h2>
+    <div className="auth-wrapper">
+      <div className="auth-container">
+        <h1>Sign in</h1>
+        <p className="auth-muted">Continue to Tech Duolingo</p>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && <div className="auth-error">{error}</div>}
 
-      <form onSubmit={handleLogin}>
-        <input
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
+        <form onSubmit={handleLogin}>
+          <div className="field">
+            <label>Username</label>
+            <input
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </div>
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+          <div className="field">
+            <label>Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
 
-        <button type="submit">Login</button>
-      </form>
+          <button type="submit" className="primary-btn">
+            Sign in
+          </button>
+        </form>
+
+        <div className="auth-footer">
+          <span>New here?</span>
+          <Link to="/register">Create an account</Link>
+        </div>
+      </div>
     </div>
   );
 }

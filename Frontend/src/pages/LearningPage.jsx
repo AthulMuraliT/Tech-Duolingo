@@ -26,8 +26,9 @@ function LearningPage() {
         });
 
         setProgressMap(map);
-      } catch (error) {
-        console.error("Failed to load data", error);
+      } catch (err) {
+        console.error("Failed to load data", err);
+        setError("Failed to load topics");
       } finally {
         setLoading(false);
       }
@@ -37,26 +38,30 @@ function LearningPage() {
   }, []);
 
   if (loading) {
-    return <p style={{ padding: "20px" }}>Loading topics...</p>;
+    return <div className="page-state">Loading topics…</div>;
   }
 
   if (error) {
-    return <p style={{ padding: "20px", color: "red" }}>{error}</p>;
+    return <div className="page-state error">{error}</div>;
   }
 
   if (topics.length === 0) {
-    return <p style={{ padding: "20px" }}>No topics available</p>;
+    return <div className="page-state">No topics available</div>;
   }
 
   return (
-    <div className="topics-container">
-      {topics.map((topic) => (
-        <TopicCard
-          key={topic.id}
-          topic={topic}
-          progress={progressMap[topic.id]}
-        />
-      ))}
+    <div className="learning-page">
+      <h1 className="learning-title">Your learning</h1>
+
+      <div className="topics-grid">
+        {topics.map((topic) => (
+          <TopicCard
+            key={topic.id}
+            topic={topic}
+            progress={progressMap[topic.id]}
+          />
+        ))}
+      </div>
     </div>
   );
 }
