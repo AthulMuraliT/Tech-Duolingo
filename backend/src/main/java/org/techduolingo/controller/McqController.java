@@ -3,10 +3,9 @@ package org.techduolingo.controller;
 import org.springframework.web.bind.annotation.*;
 import org.techduolingo.dto.McqResponseDTO;
 import org.techduolingo.dto.McqValidateRequest;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 import org.techduolingo.dto.McqValidateResponse;
 import org.techduolingo.service.McqService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -18,13 +17,21 @@ public class McqController {
     @Autowired
     private McqService mcqService;
 
-    // 3️⃣ Get MCQs for topic
+    //Get random MCQs with limit
+    @GetMapping("/mcqs")
+    public List<McqResponseDTO> getMcqs(
+            @RequestParam(defaultValue = "5") int limit
+    ) {
+        return mcqService.getRandomMcqs(limit);
+    }
+
+    //Get MCQs for a topic
     @GetMapping("/topics/{id}/mcqs")
-    public List<McqResponseDTO> getMcqs(@PathVariable Long id) {
+    public List<McqResponseDTO> getMcqsByTopic(@PathVariable Long id) {
         return mcqService.getMcqsByTopic(id);
     }
 
-    // 4️⃣ Validate answer
+    //Validate MCQ answer
     @PostMapping("/mcqs/validate")
     public McqValidateResponse validate(@RequestBody McqValidateRequest request) {
 

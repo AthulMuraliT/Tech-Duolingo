@@ -10,7 +10,6 @@ import org.techduolingo.repository.McqRepository;
 
 import java.util.List;
 
-import java.util.List;
 
 @Service
 public class McqService {
@@ -21,6 +20,24 @@ public class McqService {
     public List<McqResponseDTO> getMcqsByTopic(Long topicId) {
 
         return mcqRepository.findByTopicId(topicId)
+                .stream()
+                .map(m -> new McqResponseDTO(
+                        m.getId(),
+                        m.getQuestion(),
+                        m.getCodeSnippet(),
+                        List.of(
+                                m.getOption1(),
+                                m.getOption2(),
+                                m.getOption3(),
+                                m.getOption4()
+                        )
+                ))
+                .toList();
+    }
+
+    public List<McqResponseDTO> getRandomMcqs(int limit) {
+
+        return mcqRepository.findRandomMcqs(limit)
                 .stream()
                 .map(m -> new McqResponseDTO(
                         m.getId(),
