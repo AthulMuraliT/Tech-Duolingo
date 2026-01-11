@@ -4,11 +4,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.techduolingo.dto.McqResponseDTO;
 import org.techduolingo.dto.McqValidateRequest;
+import org.techduolingo.dto.McqValidateResponse;
 import org.techduolingo.model.User;
 import org.techduolingo.service.McqService;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -22,10 +22,20 @@ public class McqController {
     }
 
     /* ==============================
+       GET RANDOM MCQs (LIMIT)
+       ============================== */
+    @GetMapping("/mcqs")
+    public List<McqResponseDTO> getRandomMcqs(
+            @RequestParam(defaultValue = "5") int limit
+    ) {
+        return mcqService.getRandomMcqs(limit);
+    }
+
+    /* ==============================
        GET MCQs BY TOPIC
        ============================== */
     @GetMapping("/topics/{id}/mcqs")
-    public List<McqResponseDTO> getMcqs(@PathVariable Long id) {
+    public List<McqResponseDTO> getMcqsByTopic(@PathVariable Long id) {
         return mcqService.getMcqsByTopic(id);
     }
 
@@ -33,7 +43,7 @@ public class McqController {
        VALIDATE MCQ ANSWER (JWT)
        ============================== */
     @PostMapping("/mcqs/validate")
-    public Map<String, Boolean> validate(
+    public McqValidateResponse validate(
             @RequestBody McqValidateRequest request,
             Authentication authentication
     ) {
@@ -50,6 +60,6 @@ public class McqController {
                 user
         );
 
-        return Map.of("correct", correct);
+        return new McqValidateResponse(correct);
     }
 }

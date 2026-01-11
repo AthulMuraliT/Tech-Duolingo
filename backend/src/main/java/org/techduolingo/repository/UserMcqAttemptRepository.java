@@ -10,5 +10,5 @@ public interface UserMcqAttemptRepository
 
     long countByUserAndMcq_Topic(User user, Topic topic);
 
-    long countByUserAndMcq_TopicAndCorrectTrue(User user, Topic topic);
+    long countByUserAndMcq_TopicAndIsCorrectTrue(User user, Topic topic);
 }

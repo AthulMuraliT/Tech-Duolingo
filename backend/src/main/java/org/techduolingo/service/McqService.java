@@ -26,7 +26,7 @@ public class McqService {
     }
 
     /* ==============================
-       FETCH MCQs BY TOPIC
+       GET MCQs BY TOPIC
        ============================== */
     public List<McqResponseDTO> getMcqsByTopic(Long topicId) {
 
@@ -47,7 +47,28 @@ public class McqService {
     }
 
     /* ==============================
-       VALIDATE MCQ ANSWER
+       GET RANDOM MCQs (LIMIT)
+       ============================== */
+    public List<McqResponseDTO> getRandomMcqs(int limit) {
+
+        return mcqRepo.findRandomMcqs(limit)
+                .stream()
+                .map(m -> new McqResponseDTO(
+                        m.getId(),
+                        m.getQuestion(),
+                        m.getCodeSnippet(),
+                        List.of(
+                                m.getOption1(),
+                                m.getOption2(),
+                                m.getOption3(),
+                                m.getOption4()
+                        )
+                ))
+                .toList();
+    }
+
+    /* ==============================
+       VALIDATE MCQ ANSWER (USER AWARE)
        ============================== */
     public boolean validateAnswer(
             Long mcqId,
@@ -85,7 +106,9 @@ public class McqService {
                 attemptRepo.countByUserAndMcq_Topic(user, topic);
 
         long correctAttempts =
-                attemptRepo.countByUserAndMcq_TopicAndCorrectTrue(user, topic);
+                attemptRepo.countByUserAndMcq_TopicAndIsCorrectTrue(user, topic);
+
+        if (totalAttempts == 0) return;
 
         int progress = (int) ((correctAttempts * 100) / totalAttempts);
 
@@ -99,7 +122,7 @@ public class McqService {
                 });
 
         utp.setProgress(progress);
-        utp.setCompleted(progress >= 80); // configurable
+        utp.setCompleted(progress >= 80); // configurable threshold
         utp.setUpdatedAt(LocalDateTime.now());
 
         progressRepo.save(utp);
