@@ -1,0 +1,12 @@
+:root {
+  --bg-main: #000000;
+  --bg-card: #0b0b0b;
+
+  --text-main: #ffffff;
+  --text-muted: #b3b3b3;
+
+  --accent: #fde047;      /* yellow */
+  --accent-soft: #facc15;
+
+  --border-soft: rgba(255,255,255,0.08);
+}
