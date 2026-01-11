@@ -17,7 +17,8 @@ public class Topic {
     @Column(length = 2000)
     private String description;
 
-    @Column(length = 500)
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
     private String codeSnippet;
     private String externalLink;
 

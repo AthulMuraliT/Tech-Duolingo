@@ -1,26 +1,36 @@
 package org.techduolingo.service;
 
-
 import org.springframework.stereotype.Service;
 import org.techduolingo.dto.McqResponseDTO;
-import org.techduolingo.dto.McqValidateRequest;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.techduolingo.model.Mcq;
-import org.techduolingo.repository.McqRepository;
+import org.techduolingo.model.*;
+import org.techduolingo.repository.*;
 
-import java.util.List;
-
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class McqService {
 
-    @Autowired
-    private McqRepository mcqRepository;
+    private final McqRepository mcqRepo;
+    private final UserMcqAttemptRepository attemptRepo;
+    private final UserTopicProgressRepository progressRepo;
 
+    public McqService(
+            McqRepository mcqRepo,
+            UserMcqAttemptRepository attemptRepo,
+            UserTopicProgressRepository progressRepo
+    ) {
+        this.mcqRepo = mcqRepo;
+        this.attemptRepo = attemptRepo;
+        this.progressRepo = progressRepo;
+    }
+
+    /* ==============================
+       FETCH MCQs BY TOPIC
+       ============================== */
     public List<McqResponseDTO> getMcqsByTopic(Long topicId) {
 
-        return mcqRepository.findByTopicId(topicId)
+        return mcqRepo.findByTopicId(topicId)
                 .stream()
                 .map(m -> new McqResponseDTO(
                         m.getId(),
@@ -36,11 +46,62 @@ public class McqService {
                 .toList();
     }
 
-    public boolean validateAnswer(Long mcqId, int selectedOption) {
+    /* ==============================
+       VALIDATE MCQ ANSWER
+       ============================== */
+    public boolean validateAnswer(
+            Long mcqId,
+            int selectedOption,
+            User user
+    ) {
 
-        Mcq mcq = mcqRepository.findById(mcqId)
+        Mcq mcq = mcqRepo.findById(mcqId)
                 .orElseThrow(() -> new RuntimeException("MCQ not found"));
 
-        return mcq.getCorrectOption() == selectedOption;
+        boolean correct = mcq.getCorrectOption() == selectedOption;
+
+        // 1️⃣ Save MCQ attempt
+        UserMcqAttempt attempt = new UserMcqAttempt();
+        attempt.setUser(user);
+        attempt.setMcq(mcq);
+        attempt.setSelectedOption(selectedOption);
+        attempt.setCorrect(correct);
+        attempt.setAttemptedAt(LocalDateTime.now());
+
+        attemptRepo.save(attempt);
+
+        // 2️⃣ Update topic progress
+        updateTopicProgress(user, mcq.getTopic());
+
+        return correct;
+    }
+
+    /* ==============================
+       UPDATE TOPIC PROGRESS
+       ============================== */
+    private void updateTopicProgress(User user, Topic topic) {
+
+        long totalAttempts =
+                attemptRepo.countByUserAndMcq_Topic(user, topic);
+
+        long correctAttempts =
+                attemptRepo.countByUserAndMcq_TopicAndCorrectTrue(user, topic);
+
+        int progress = (int) ((correctAttempts * 100) / totalAttempts);
+
+        UserTopicProgress utp = progressRepo
+                .findByUserAndTopic(user, topic)
+                .orElseGet(() -> {
+                    UserTopicProgress p = new UserTopicProgress();
+                    p.setUser(user);
+                    p.setTopic(topic);
+                    return p;
+                });
+
+        utp.setProgress(progress);
+        utp.setCompleted(progress >= 80); // configurable
+        utp.setUpdatedAt(LocalDateTime.now());
+
+        progressRepo.save(utp);
     }
 }

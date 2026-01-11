@@ -18,3 +18,16 @@
   transform: scale(1.03);
   background-color: #f9fafb;
 }
+
+.progress-bar {
+  height: 6px;
+  background-color: #e5e7eb;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #4ade80;
+}
