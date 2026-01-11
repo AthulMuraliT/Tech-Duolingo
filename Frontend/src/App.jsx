@@ -11,7 +11,7 @@ export default function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/learn" element={<LearnPage />} />
         <Route path="/game" element={<GamePage />} />
-        <Route path="/quiz/:termId" element={<QuizPage />} />
+        <Route path="/quiz/:topicId" element={<QuizPage />} />
       </Routes>
     </BrowserRouter>
   );

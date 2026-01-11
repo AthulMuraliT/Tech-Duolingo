@@ -1,8 +1,6 @@
-
-
-/* ===============================
+/* ======================================================
    RESET & BASE
-================================ */
+====================================================== */
 * {
   box-sizing: border-box;
   font-family: 'Inter', system-ui, sans-serif;
@@ -15,9 +13,33 @@ body {
   overflow-x: hidden;
 }
 
-/* ===============================
-   NAVBAR
-================================ */
+/* =============================== RESET & BASE ================================ */
+* {
+  box-sizing: border-box;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-main);
+  color: var(--text-main);
+  overflow-x: hidden;
+}
+
+/* =============================== RESET & BASE ================================ */
+* {
+  box-sizing: border-box;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-main);
+  color: var(--text-main);
+  overflow-x: hidden;
+}
+
+/* =============================== NAVBAR ================================ */
 .navbar {
   position: absolute;
   top: 0;
@@ -44,9 +66,7 @@ body {
   color: var(--text-main);
 }
 
-/* ===============================
-   HERO SECTION
-================================ */
+/* =============================== HERO SECTION ================================ */
 .hero {
   min-height: 100vh;
   background: var(--bg-main);
@@ -61,7 +81,7 @@ body {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   align-items: center;
-  gap: 64px;
+  gap: 56px; /* reduced */
 }
 
 .hero h1 {
@@ -75,15 +95,13 @@ body {
 }
 
 .hero p {
-  margin: 22px 0;
+  margin: 20px 0;
   max-width: 520px;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: var(--text-muted);
 }
 
-/* ===============================
-   BUTTONS
-================================ */
+/* =============================== BUTTONS ================================ */
 .primary {
   background: var(--accent);
   color: #000;
@@ -98,15 +116,13 @@ body {
   background: var(--accent-soft);
 }
 
-/* ===============================
-   SPLINE 3D
-================================ */
+/* =============================== SPLINE 3D ================================ */
 .hero-3d {
   width: 100%;
   height: 420px;
   background: radial-gradient(
     circle at center,
-    rgba(255,255,255,0.06),
+    rgba(255, 255, 255, 0.06),
     transparent 70%
   );
 }
@@ -116,44 +132,39 @@ body {
   height: 100% !important;
 }
 
-/* ===============================
-   SECTION BASE
-================================ */
+/* =============================== SECTION BASE ================================ */
 .section {
   background: var(--bg-main);
-  padding: 100px 0;
+  padding: 72px 0; /* reduced */
 }
 
 .container {
-  max-width: 1100px;
+  max-width: 1200px; /* increased */
   margin: 0 auto;
   padding: 0 48px;
 }
 
 .section-title {
-  font-size: 2rem;
+  font-size: 2.1rem;
   font-weight: 600;
-  margin-bottom: 42px;
+  margin-bottom: 36px;
 }
 
-/* ===============================
-   CARD SYSTEM (GLASS + GLOW)
-================================ */
+/* =============================== CARD SYSTEM ================================ */
 .pro-card,
 .step-card,
 .term-card {
   background: linear-gradient(
     180deg,
-    rgba(255,255,255,0.08),
-    rgba(255,255,255,0.02)
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.02)
   );
   border: 1px solid var(--border-soft);
   border-radius: 18px;
-  padding: 28px;
+  padding: 22px; /* reduced */
   position: relative;
   backdrop-filter: blur(14px);
-
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .pro-card::before,
@@ -164,48 +175,45 @@ body {
   inset: 0;
   border-radius: 18px;
   pointer-events: none;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
 }
 
 .pro-card:hover,
 .step-card:hover,
 .term-card:hover {
-  transform: translateY(-8px);
-  box-shadow:
-    0 25px 60px rgba(0,0,0,0.8),
-    0 0 40px rgba(253,224,71,0.08);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75),
+    0 0 32px rgba(253, 224, 71, 0.08);
 }
 
-/* ===============================
-   WHY TECH DUOLINGO
-================================ */
+/* =============================== WHY TECH DUOLINGO ================================ */
 .grid-4 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 28px;
+  gap: 18px; /* reduced */
 }
 
 .icon {
-  font-size: 1.8rem;
-  margin-bottom: 14px;
+  font-size: 1.9rem;
+  margin-bottom: 12px;
   color: var(--accent);
 }
 
 .pro-card h4 {
-  margin: 12px 0 6px;
+  margin: 10px 0 6px;
+  font-size: 1.1rem;
 }
 
 .pro-card p {
   color: var(--text-muted);
+  font-size: 0.95rem;
 }
 
-/* ===============================
-   HOW IT WORKS
-================================ */
+/* =============================== HOW IT WORKS ================================ */
 .steps-row {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 22px;
+  gap: 16px; /* reduced */
 }
 
 .step-card {
@@ -213,59 +221,232 @@ body {
   font-weight: 500;
 }
 
-/* ===============================
-   PREVIEW TERM (HIGHLIGHT CARD)
-================================ */
+/* =============================== PREVIEW TERM ================================ */
 .term-card {
   max-width: 760px;
-  box-shadow:
-    0 30px 70px rgba(0,0,0,0.9),
-    0 0 60px rgba(253,224,71,0.12);
+  margin: auto;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9),
+    0 0 60px rgba(253, 224, 71, 0.12);
 }
 
 .term-desc {
   color: var(--text-muted);
-  margin: 12px 0 22px;
+  margin: 10px 0 20px;
 }
 
 .code-block {
   background: linear-gradient(180deg, #0f172a, #020617);
   color: #e5e7eb;
-  padding: 18px;
+  padding: 16px;
   border-radius: 10px;
   overflow-x: auto;
-  margin-bottom: 26px;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+  margin-bottom: 22px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 
 .primary-btn {
   background: #635bff;
   color: #ffffff;
   border: none;
-  padding: 12px 30px;
+  padding: 12px 28px;
   border-radius: 8px;
   font-weight: 500;
   cursor: pointer;
 }
 
-/* ===============================
+
+
+
+/* =============================== FOOTER ================================ */
+.footer {
+  background: var(--bg-main);
+  border-top: 1px solid var(--border-soft);
+  padding-top: 56px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 32px;
+  padding-bottom: 36px;
+}
+
+.footer-logo {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.footer-text {
+  color: var(--text-muted);
+  margin-top: 12px;
+  max-width: 320px;
+}
+
+.footer-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer li {
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.footer li:hover {
+  color: var(--text-main);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 18px;
+  font-size: 0.85rem;
+  color: #6b7280;
+  border-top: 1px solid var(--border-soft);
+}
+.footer a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: var(--text-main);
+}
+
+
+/* =============================== RESPONSIVE ================================ */
+@media (max-width: 1024px) {
+  .navbar {
+    padding: 20px 40px;
+  }
+
+  .hero-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .grid-4,
+  .steps-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-grid {
+    grid-template-columns: 1.5fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 16px 24px;
+  }
+
+  .hero h1 {
+    font-size: 2.6rem;
+  }
+
+  .section {
+    padding: 56px 0;
+  }
+
+  .container {
+    padding: 0 24px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 2.1rem;
+  }
+
+  .grid-4,
+  .steps-row,
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-3d {
+    height: 300px;
+  }
+
+  .footer {
+    text-align: center;
+  }
+
+  .footer-text {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* ======================================================
+   SECTION BASE
+====================================================== */
+.section {
+  padding: 100px 0;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* ======================================================
+   CARD SYSTEM (GLASS + GLOW)
+====================================================== */
+.pro-card,
+.step-card,
+.term-card,
+.game-card {
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.10),
+    rgba(255,255,255,0.04)
+  );
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 20px;
+  padding: 32px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pro-card:hover,
+.step-card:hover,
+.term-card:hover,
+.game-card:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 30px 60px rgba(0,0,0,0.8),
+    0 0 40px rgba(253,224,71,0.12);
+}
+
+/* ======================================================
    LEARN PAGE
-================================ */
+====================================================== */
 .learn-layout {
   display: grid;
   grid-template-columns: 240px 1fr;
   min-height: 100vh;
 }
+
 .learn-content {
   padding: 48px;
-  overflow: visible;
 }
+
 .learn-content p {
   max-width: 900px;
   line-height: 1.7;
-  white-space: normal;
+  color: var(--text-muted);
 }
-
 
 .sidebar {
   background: rgba(255,255,255,0.04);
@@ -280,8 +461,8 @@ body {
 
 .sidebar li {
   padding: 10px;
-  cursor: pointer;
   border-radius: 6px;
+  cursor: pointer;
   color: var(--text-muted);
 }
 
@@ -291,69 +472,63 @@ body {
   color: #000;
 }
 
-.learn-content {
-  padding: 48px;
-  overflow-y: auto;
+.sidebar-home,
+.home-btn {
+  width: 100%;
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border-soft);
+  padding: 10px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  text-align: left;
 }
 
+.sidebar-home:hover,
+.home-btn:hover {
+  background: var(--accent);
+  color: #000;
+}
 /* ===============================
-   GAME PAGE
+   CODE SNIPPET BOX
 ================================ */
+.code-box {
+  background: linear-gradient(180deg, #0f172a, #020617);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin-top: 12px;
+  margin-bottom: 28px;
+  overflow-x: auto;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.05),
+    0 10px 30px rgba(0,0,0,0.6);
+}
+
+.code-box pre {
+  margin: 0;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #e5e7eb;
+  white-space: pre;
+}
+
+.code-box code {
+  display: block;
+}
+
+/* ======================================================
+   GAME PAGE
+====================================================== */
 .game {
   min-height: 100vh;
   padding: 120px;
   text-align: center;
 }
-/* ===============================
-   GAME NAVIGATION
-================================ */
-/* ===============================
-   GAME TERM SELECTION CARDS
-================================ */
 
-.game-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 28px;
-  max-width: 900px;
-  width: 100%;
-}
-
-.game-card {
-  background: linear-gradient(
-    180deg,
-    rgba(255,255,255,0.10),
-    rgba(255,255,255,0.04)
-  );
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 20px;
-  padding: 32px;
-  cursor: pointer;
-  text-align: center;
-
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.game-card h3 {
-  font-size: 1.4rem;
-  margin-bottom: 10px;
-  color: #ffffff;
-}
-
-.game-card p {
-  color: #b3b3b3;
-  font-size: 0.95rem;
-}
-
-.game-card:hover {
-  transform: translateY(-8px);
-  box-shadow:
-    0 30px 60px rgba(0,0,0,0.8),
-    0 0 40px rgba(253,224,71,0.12);
-}
-/* ===============================
-   GAME NAVIGATION
-================================ */
 .game-nav {
   display: flex;
   gap: 12px;
@@ -374,10 +549,143 @@ body {
   color: #000;
 }
 
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 28px;
+  max-width: 900px;
+  width: 100%;
+  margin: auto;
+}
 
-/* ===============================
-   FOOTER
-================================ */
+.game-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.game-card p {
+  font-size: 0.95rem;
+  color: #b3b3b3;
+}
+/* ======================================================
+   QUIZ PAGE
+====================================================== */
+.quiz-page {
+  min-height: 100vh;
+  padding: 120px 40px;
+  text-align: center;
+}
+
+/* ======================================================
+   QUIZ CARD
+====================================================== */
+.quiz-card {
+  max-width: 760px;
+  margin: 40px auto 0;
+  padding: 40px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.08),
+    rgba(255,255,255,0.02)
+  );
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 20px;
+
+  box-shadow:
+    0 30px 70px rgba(0,0,0,0.8),
+    0 0 40px rgba(253,224,71,0.08);
+}
+
+/* ======================================================
+   QUIZ QUESTION
+====================================================== */
+.quiz-question {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 32px;
+  letter-spacing: 0.2px;
+}
+
+/* ======================================================
+   QUIZ OPTIONS
+====================================================== */
+.quiz-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+/* ======================================================
+   QUIZ OPTION BUTTON
+====================================================== */
+.quiz-option {
+  padding: 18px 22px;
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: left;
+
+  color: #ffffff;
+  cursor: pointer;
+  border-radius: 14px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.10),
+    rgba(255,255,255,0.04)
+  );
+  border: 1px solid rgba(255,255,255,0.18);
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.quiz-option:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 15px 30px rgba(0,0,0,0.6),
+    0 0 30px rgba(253,224,71,0.10);
+}
+
+.quiz-option:active {
+  transform: scale(0.98);
+}
+
+.quiz-option:disabled {
+  opacity: 0.85;
+  cursor: not-allowed;
+}
+
+/* ======================================================
+   OPTIONAL STATES (READY FOR FUTURE)
+====================================================== */
+.quiz-option.correct {
+  border-color: #22c55e;
+  background: rgba(34,197,94,0.15);
+}
+
+.quiz-option.wrong {
+  border-color: #ef4444;
+  background: rgba(239,68,68,0.15);
+}
+
+/* ======================================================
+   MOBILE OPTIMIZATION
+====================================================== */
+@media (max-width: 640px) {
+  .quiz-card {
+    padding: 28px;
+  }
+
+  .quiz-option {
+    padding: 16px 18px;
+    font-size: 1rem;
+  }
+}
+
+/* =============================== FOOTER ================================ */
 .footer {
   background: var(--bg-main);
   border-top: 1px solid var(--border-soft);
@@ -430,22 +738,41 @@ body {
   color: #6b7280;
   border-top: 1px solid var(--border-soft);
 }
-/* ===============================
-   HOME BUTTON (SIDEBAR)
-================================ */
-.home-btn {
-  width: 100%;
-  background: transparent;
-  color: var(--text-muted);
-  border: 1px solid var(--border-soft);
-  padding: 10px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  cursor: pointer;
-  text-align: left;
+/* =============================== FOOTER RESPONSIVE ================================ */
+@media (max-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 32px;
+  }
 }
 
-.home-btn:hover {
-  background: var(--accent);
-  color: #000;
+@media (max-width: 768px) {
+  .footer {
+    padding-top: 40px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+
+  .footer-text {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .footer ul {
+    padding: 0;
+  }
+
+  .footer-text {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
