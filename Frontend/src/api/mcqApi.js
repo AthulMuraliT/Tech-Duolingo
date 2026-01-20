@@ -13,13 +13,6 @@ export const validateMcq = async (mcqId, selectedOption) => {
   return response.data;
 };
 
-// export const getMcqsByTopic = async (topicId, limit = 5) => {
-//   const response = await apiClient.get(
-//     `/topics/${topicId}/mcqs?limit=${limit}`
-//   );
-//   return response.data;
-// };
-
 export const getMcqsByTopic = async (topicId) => {
   const response = await apiClient.get(`/topics/${topicId}/mcqs`);
   return response.data;
